@@ -329,6 +329,7 @@ get_stadiamap_tile <- function(maptype, zoom, x, y, color, force = FALSE, messag
   # deal with bad responses
   if (response$status_code != 200L) {
 
+    if(maptype %in% c("stamen_watercolor")) filetype <- "jpg" else filetype <- "png"
     httr::message_for_status(response, glue("acquire tile /{maptype}/{zoom}/{x}/{y}.{filetype}"))
     if (messaging) message("\n", appendLF = FALSE)
     tile <- matrix(rgb(1, 1, 1, 0), nrow = 256L, ncol = 256L)
